@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,7 +12,6 @@ function LoginForm() {
       setEmailError('Please enter a valid Gmail address');
       return false;
     }
-    
     setEmailError('');
     return true;
   };
@@ -33,65 +33,45 @@ function LoginForm() {
     e.preventDefault();
     const isEmailValid = validateEmail(email);
     const isPasswordValid = validatePassword(password);
-    
     if (isEmailValid && isPasswordValid) {
       alert('Form submitted successfully!');
     }
   };
 
-  return React.createElement(
-    'div',
-    { className: 'container' },
-    [
-      React.createElement('div', { className: 'leftpart' }),
-      React.createElement(
-        'div',
-        { className: 'Rightpart' },
-        React.createElement(
-          'div',
-          { className: 'loginpage' },
-          [
-            React.createElement(
-              'form',
-              { onSubmit: handleSubmit },
-              [
-                React.createElement('h3', null, 'LOGIN'),
-                React.createElement('input', {
-                  type: 'text',
-                  placeholder: 'Email id',
-                  value: email,
-                  onChange: (e) => setEmail(e.target.value),
-                  onBlur: () => validateEmail(email)
-                }),
-                emailError && React.createElement(
-                  'div',
-                  { className: 'error-message' },
-                  emailError
-                ),
-                React.createElement('input', {
-                  type: 'password',
-                  placeholder: 'Password',
-                  value: password,
-                  onChange: (e) => setPassword(e.target.value),
-                  onBlur: () => validatePassword(password)
-                }),
-                passwordError && React.createElement(
-                  'div',
-                  { className: 'error-message' },
-                  passwordError
-                ),
-                React.createElement('input', {
-                  type: 'submit',
-                  value: 'Submit'
-                })
-              ]
-            ),
-            React.createElement('p', null, 'Forgot Password?')
-          ]
-        )
-      )
-    ]
+  return (
+    <div className="container">
+      <div className="leftpart"></div>
+      <div className="Rightpart">
+        <div className="loginpage">
+          <form onSubmit={handleSubmit}>
+            <h3>LOGIN</h3>
+
+            <input
+              type="text"
+              placeholder="Email id"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => validateEmail(email)}
+            />
+            {emailError && <div className="error-message">{emailError}</div>}
+
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onBlur={() => validatePassword(password)}
+            />
+            {passwordError && <div className="error-message">{passwordError}</div>}
+
+            <input type="submit" value="Submit" />
+          </form>
+
+          <p>Forgot Password?</p>
+        </div>
+      </div>
+    </div>
   );
 }
 
-export default LoginForm;
+export default LoginForm;
