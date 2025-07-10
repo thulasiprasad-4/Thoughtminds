@@ -1,38 +1,137 @@
-.App {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(#b18ca2, #43372a3a, #5EABD6);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 70px; 
+    padding: 20px;
+}
+
+.leftpart {
+    width: 50%;
+}
+
+.leftpart h1 {
+    font-size: 48px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.leftpart h3 {
+    color: white;
+    font-size: 24px;
+    max-width: 400px;
+}
+
+.Rightpart {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loginpage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e9eddf;
+    width: 400px;
+    height: 300px;
+    padding: 20px;
+    box-shadow: -10px -10px 15px rgba(0, 0, 0, 0.1),
+                10px 10px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    height: 50px;
+    margin: 10px 0;
+    padding: 0 10px;
+    outline: none;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+input[type="submit"] {
+    background-color: rgb(12, 199, 80);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: rgb(10, 170, 70);
+}
+
+p {
+    color: royalblue;
+    cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  width: 100%;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 500vh;
+  background-color: antiquewhite;
+  color: rgb(201, 41, 41);
+  font-family: Arial, sans-serif;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.profile-container h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.profile-container p {
+  font-size: 24px;
+  color: white;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
+
+
+
