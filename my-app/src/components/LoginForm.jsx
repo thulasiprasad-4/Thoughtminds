@@ -1,10 +1,13 @@
+// src/components/LoginForm.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     const gmailRegex = /^[a-z0-9](\.?[a-z0-9]){5,}@gmail\.com$/;
@@ -34,7 +37,7 @@ function LoginForm() {
     const isEmailValid = validateEmail(email);
     const isPasswordValid = validatePassword(password);
     if (isEmailValid && isPasswordValid) {
-      alert('Form submitted successfully!');
+      navigate('/profile');
     }
   };
 
@@ -74,4 +77,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default LoginForm;
