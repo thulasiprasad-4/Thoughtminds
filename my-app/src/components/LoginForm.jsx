@@ -1,46 +1,49 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-
-const users = [
-  { email: "Sincere@april.biz", username: "Bret" },
-  { email: "Shanna@melissa.tv", username: "Antonette" },
-  { email: "Nathan@yesenia.net", username: "Samantha" },
-  { email: "Julianne.OConner@kory.org", username: "Karianne" },
-  { email: "Lucio_Hettinger@annie.ca", username: "Kamren" },
-  { email: "Karley_Dach@jasper.info", username: "Leopoldo_Corkery" },
-  { email: "Telly.Hoeger@billy.biz", username: "Elwyn.Skiles" },
-  { email: "Sherwood@rosamond.me", username: "Maxime_Nienow" },
-  { email: "Chaim_McDermott@dana.io", username: "Delphine" },
-  { email: "Rey.Padberg@karina.biz", username: "Moriah.Stanton" }
-];
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
+  
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((res) => res.json())
+      .then((data) => setUsers(data.slice(0, 10))) // 
+      .catch((err) => {
+        console.error('Error fetching user data:', err);
+        setErrorMessage("Unable to load users.");
+      });
+  }, []);
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
     
-    const user = users.find(u => u.email === email);
+    const matchedUser = users.find(
+      (user) => user.email.toLowerCase() === email.toLowerCase()
+    );
 
-    if (!user) {
-      setLoginError("❌ Email is not allowed to login.");
+    if (!matchedUser) {
+      setErrorMessage("Can't login");
       return;
     }
 
-    const expectedPassword = `${user.username}@123`;
+    
+    const expectedPassword = `${matchedUser.username}@123`;
+
+
     if (password !== expectedPassword) {
-      setLoginError("❌ Incorrect password.");
+      setErrorMessage("Can't login");
       return;
     }
 
-  
-    setLoginError('');
+
+    setErrorMessage('');
     navigate('/profile');
   };
 
@@ -54,9 +57,10 @@ function LoginForm() {
 
             <input
               type="text"
-              placeholder="Email ID"
+              placeholder="Email id"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
 
             <input
@@ -64,9 +68,14 @@ function LoginForm() {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
 
-            {loginError && <div className="error-message">{loginError}</div>}
+            {errorMessage && (
+              <div className="error-message" style={{ color: 'red' }}>
+                {errorMessage}
+              </div>
+            )}
 
             <input type="submit" value="Submit" />
           </form>
