@@ -8,16 +8,16 @@ function LoginForm() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
-  
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((res) => res.json())
-      .then((data) => setUsers(data.slice(0, 10))) // 
+      .then((data) => {
+        setUsers(data);
+      })
       .catch((err) => {
-        console.error('Error fetching user data:', err);
-        setErrorMessage("Unable to load users.");
-      });
-  }, []);
+        console.error('Failed to fetch users:', err);
+      });
+  }, []);
 
   
   const handleSubmit = (e) => {
