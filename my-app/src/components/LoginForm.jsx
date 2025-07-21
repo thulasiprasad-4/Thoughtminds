@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../App.css';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((res) => res.json())
@@ -16,71 +16,74 @@ function LoginForm() {
       })
       .catch((err) => {
         console.error('Failed to fetch users:', err);
-      });
-  }, []);
+      });
+  }, []);
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    
-    const matchedUser = users.find(
-      (user) => user.email.toLowerCase() === email.toLowerCase()
+    const user = users.find(
+      (u) => u.email.toLowerCase() === email.toLowerCase()
     );
 
-    if (!matchedUser) {
-      setErrorMessage("Can't login");
+    if (!user) {
+      alert("Can't login: Email not found.");
       return;
     }
 
-    
-    const expectedPassword = `${matchedUser.username}@123`;
-
+    const expectedPassword = `${user.username}@123`;
 
     if (password !== expectedPassword) {
-      setErrorMessage("Can't login");
+      alert("Can't login: Incorrect password.");
       return;
     }
 
-
-    setErrorMessage('');
-    navigate('/profile');
+    alert('Login successful!');
+    setEmail('');
+    setPassword('');
+    navigate('/profile', { state: { user } });
   };
 
   return (
     <div className="container">
-      <div className="leftpart"></div>
-      <div className="Rightpart">
-        <div className="loginpage">
-          <form onSubmit={handleSubmit}>
-            <h3>LOGIN</h3>
+      <div className="loginpage">
+        <div className="form-container">
+          <form id="myForm" onSubmit={handleSubmit}>
+            <h5>Login</h5>
 
-            <input
-              type="text"
-              placeholder="Email id"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <div className="form-group full-width input">
+              <label>
+                Email ID: <span style={{ color: 'red' }}>*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Email id"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <br />
+            <div className="form-group full-width input">
+              <label>
+                Password<span style={{ color: 'red' }}>*</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
 
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-
-            {errorMessage && (
-              <div className="error-message" style={{ color: 'red' }}>
-                {errorMessage}
-              </div>
-            )}
-
-            <input type="submit" value="Submit" />
+            <a href="/forgot-password" className="forgot-password">
+              Forgot Password?
+            </a>
+            
+            <input type="submit" value="Login" />
+            
+            
           </form>
-
-          <p>Forgot Password?</p>
         </div>
       </div>
     </div>
@@ -88,4 +91,5 @@ function LoginForm() {
 }
 
 export default LoginForm;
+
 
