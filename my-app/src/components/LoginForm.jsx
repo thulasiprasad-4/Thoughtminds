@@ -1,44 +1,50 @@
-// src/components/LoginForm.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
-  const validateEmail = (email) => {
-    const gmailRegex = /^[a-z0-9](\.?[a-z0-9]){5,}@gmail\.com$/;
-    if (!gmailRegex.test(email)) {
-      setEmailError('Please enter a valid Gmail address');
-      return false;
-    }
-    setEmailError('');
-    return true;
-  };
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((res) => res.json())
+      .then((data) => {
+        setUsers(data);
+      })
+      .catch((err) => {
+        console.error('Failed to fetch users:', err);
+      });
+  }, []);
 
-  const validatePassword = (password) => {
-    if (password.length < 8) {
-      setPasswordError('Password must be at least 8 characters');
-      return false;
-    }
-    if (!/[A-Za-z]/.test(password) || !/\d/.test(password)) {
-      setPasswordError('Password must contain both letters and numbers');
-      return false;
-    }
-    setPasswordError('');
-    return true;
-  };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isEmailValid = validateEmail(email);
-    const isPasswordValid = validatePassword(password);
-    if (isEmailValid && isPasswordValid) {
-      navigate('/profile');
+
+    
+    const matchedUser = users.find(
+      (user) => user.email.toLowerCase() === email.toLowerCase()
+    );
+
+    if (!matchedUser) {
+      setErrorMessage("Can't login");
+      return;
     }
+
+    
+    const expectedPassword = `${matchedUser.username}@123`;
+
+
+    if (password !== expectedPassword) {
+      setErrorMessage("Can't login");
+      return;
+    }
+
+
+    setErrorMessage('');
+    navigate('/profile');
   };
 
   return (
@@ -54,18 +60,22 @@ function LoginForm() {
               placeholder="Email id"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              onBlur={() => validateEmail(email)}
+              required
             />
-            {emailError && <div className="error-message">{emailError}</div>}
 
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              onBlur={() => validatePassword(password)}
+              required
             />
-            {passwordError && <div className="error-message">{passwordError}</div>}
+
+            {errorMessage && (
+              <div className="error-message" style={{ color: 'red' }}>
+                {errorMessage}
+              </div>
+            )}
 
             <input type="submit" value="Submit" />
           </form>
@@ -77,4 +87,5 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default LoginForm;
+
