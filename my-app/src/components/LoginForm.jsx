@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
@@ -7,16 +8,12 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((res) => res.json())
-      .then((data) => {
-        setUsers(data);
-      })
-      .catch((err) => {
-        console.error('Failed to fetch users:', err);
-      });
+      .then((data) => setUsers(data))
+      .catch((err) => console.error('Failed to fetch users:', err));
   }, []);
 
   const handleSubmit = (e) => {
@@ -38,9 +35,10 @@ function LoginForm() {
     }
 
     alert('Login successful!');
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
     setEmail('');
     setPassword('');
-    navigate('/profile', { state: { user } });
+    navigate('/profile');
   };
 
   return (
@@ -51,9 +49,7 @@ function LoginForm() {
             <h5>Login</h5>
 
             <div className="form-group full-width input">
-              <label>
-                Email ID: <span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>Email ID: <span style={{ color: 'red' }}>*</span></label>
               <input
                 type="text"
                 placeholder="Email id"
@@ -64,9 +60,7 @@ function LoginForm() {
             </div>
             <br />
             <div className="form-group full-width input">
-              <label>
-                Password<span style={{ color: 'red' }}>*</span>
-              </label>
+              <label>Password<span style={{ color: 'red' }}>*</span></label>
               <input
                 type="password"
                 placeholder="Password"
@@ -79,10 +73,8 @@ function LoginForm() {
             <a href="/forgot-password" className="forgot-password">
               Forgot Password?
             </a>
-            
+
             <input type="submit" value="Login" />
-            
-            
           </form>
         </div>
       </div>
@@ -91,5 +83,6 @@ function LoginForm() {
 }
 
 export default LoginForm;
+
 
 
