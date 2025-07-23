@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader';
-
+import getInitials from '../functions/getInitials';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -19,15 +19,11 @@ const Profile = () => {
 
   if (!user) return null;
 
-  const initials = user.name
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-    .toUpperCase();
+  const initials = getInitials(user.name);
 
   return (
     <div className="profile-page">
-      <ProfileHeader username={user.username} initials={initials} />
+      <ProfileHeader />
 
       <div className="profile-container">
         <div className="profile-left">
@@ -54,5 +50,7 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
 
 
