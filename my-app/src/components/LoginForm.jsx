@@ -34,7 +34,6 @@ function LoginForm() {
       return;
     }
 
-    alert('Login successful!');
     localStorage.setItem('loggedInUser', JSON.stringify(user));
     setEmail('');
     setPassword('');
