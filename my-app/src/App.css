@@ -1,4 +1,4 @@
-/* Reset and base styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -11,20 +11,20 @@ html, body, #root {
   background-color: #f5f6fa;
 }
 
-/* PROFILE PAGE */
+
 .profile-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   height: 100vh;
-  overflow: hidden; /* prevents scrolling */
-  padding: 0; /* removed top padding that pushes layout */
+  overflow: hidden; 
+  padding: 0; 
 }
 
-/* Header */
+
 .profile-header {
-  background-color: #ffffff;
+  background-color: #0e0c0c;
   width: 100%;
   max-width: 900;
   border-radius: 10px 10px 0 0;
@@ -57,7 +57,7 @@ html, body, #root {
 .header-username {
   font-size: 20px;
   font-weight: 600;
-  color: #333;
+  color: #f5f3f3;
 }
 
 .logout-button {
@@ -75,8 +75,6 @@ html, body, #root {
 .logout-button:hover {
   background-color: #125ea3;
 }
-
-/* Main profile content */
 .profile-container {
   background-color: #ffffff;
   border-radius: 0 0 10px 10px;
@@ -88,10 +86,10 @@ html, body, #root {
   padding: 30px;
   gap: 30px;
   flex: 1;
-  overflow: hidden; /* ensures container doesn't cause scroll */
+  overflow: hidden; 
 }
 
-/* Left section */
+
 .profile-left {
   flex: 1;
   text-align: center;
@@ -125,7 +123,7 @@ html, body, #root {
   font-size: 14px;
 }
 
-/* Right section */
+
 .profile-right {
   flex: 3;
   min-width: 300px;
@@ -165,7 +163,7 @@ html, body, #root {
   color: #333;
 }
 
-/* Responsive layout */
+
 @media (max-width: 768px) {
   .profile-container {
     flex-direction: column;
@@ -184,7 +182,7 @@ html, body, #root {
 }
 
 
-/* LOGIN PAGE STYLES - kept intact */
+
 .container {
   display: flex;
   flex-direction: row;
