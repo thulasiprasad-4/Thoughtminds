@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
 import LoginForm from './components/LoginForm';
-import Profile from './components/profile';
+import Profile from './components/Profile';
+
 
 function App() {
   return (
@@ -16,4 +15,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;

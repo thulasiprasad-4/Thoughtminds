@@ -1,99 +1,264 @@
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: content-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body {
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(#b18ca2, #43372a3a, #5EABD6);
-    font-family: Arial, sans-serif;
+html, body, #root {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f6fa;
 }
+
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  overflow: hidden; 
+  padding: 0; 
+}
+
+
+.profile-header {
+  background-color: #0e0c0c;
+  width: 100%;
+  max-width: 900;
+  border-radius: 10px 10px 0 0;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.small-profile-photo {
+  width: 48px;
+  height: 48px;
+  background-color: #1976d2;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-username {
+  font-size: 20px;
+  font-weight: 600;
+  color: #f5f3f3;
+}
+
+.logout-button {
+  background-color: #1976d2;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #125ea3;
+}
+.profile-container {
+  background-color: #ffffff;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 900;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px;
+  gap: 30px;
+  flex: 1;
+  overflow: hidden; 
+}
+
+
+.profile-left {
+  flex: 1;
+  text-align: center;
+  min-width: 180px;
+  border-right: 1px solid #ddd;
+  padding-right: 20px;
+}
+
+.initial-circle {
+  width: 90px;
+  height: 90px;
+  background-color: #1976d2;
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.profile-left h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.profile-left p {
+  color: #777;
+  font-size: 14px;
+}
+
+
+.profile-right {
+  flex: 3;
+  min-width: 300px;
+}
+
+.profile-right h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px;
+}
+
+.form-grid div {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-grid label {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.form-grid input {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  color: #333;
+}
+
+
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .profile-left {
+    border-right: none;
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 
 .container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 70px; 
-    padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 70px;
+  padding: 20px;
 }
 
 .leftpart {
-    width: 50%;
+  width: 50%;
 }
 
 .leftpart h1 {
-    font-size: 48px;
-    color: white;
-    margin-bottom: 20px;
+  font-size: 48px;
+  color: white;
+  margin-bottom: 20px;
 }
 
 .leftpart h3 {
-    color: white;
-    font-size: 24px;
-    max-width: 400px;
+  color: white;
+  font-size: 24px;
+  max-width: 400px;
 }
 
 .Rightpart {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .loginpage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #e9eddf;
-    width: 400px;
-    height: 300px;
-    padding: 20px;
-    box-shadow: -10px -10px 15px rgba(0, 0, 0, 0.1),
-                10px 10px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  background-color: #e9eddf;
+  width: 400px;
+  height: 400px;
+  padding: 20px;
+  box-shadow: -10px -10px 15px rgba(0, 0, 0, 0.1),
+              10px 10px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 input {
-    width: 100%;
-    height: 50px;
-    margin: 10px 0;
-    padding: 0 10px;
-    outline: none;
-    border: 1px solid #ccc;
-    font-size: 18px;
-    border-radius: 10px;
+  width: 100%;
+  height: 50px;
+  margin: 10px 0;
+  padding: 0 10px;
+  outline: none;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  border-radius: 10px;
 }
 
 input[type="submit"] {
-    background-color: rgb(12, 199, 80);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: rgb(10, 170, 70);
+  background-color: rgb(10, 170, 70);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 p {
-    color: royalblue;
-    cursor: pointer;
+  color: royalblue;
+  cursor: pointer;
 }
 
 .error-message {
@@ -103,34 +268,8 @@ p {
   margin-bottom: 8px;
   width: 100%;
   text-align: left;
-  padding-left: 10px;
+  padding-left: 10px;
 }
-
-.profile-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 500vh;
-  background-color: antiquewhite;
-  color: rgb(201, 41, 41);
-  font-family: Arial, sans-serif;
-  text-align: center;
-}
-
-.profile-container h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-}
-
-.profile-container p {
-  font-size: 24px;
-  color: white;
-}
-
-
-
 
 
 
