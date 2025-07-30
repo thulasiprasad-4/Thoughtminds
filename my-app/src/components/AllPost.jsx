@@ -37,13 +37,13 @@ const AllPost = ({ loggedInUserId }) => {
 
           return (
             <div key={post.id} className="post-card">
-              {/* Profile Picture & Username */}
+              {}
               <div className="post-user">
                 <div className="user-initial">{initials}</div>
                 <span className="user-name">{user?.name || 'Unknown User'}</span>
               </div>
 
-              {/* Post Title & Body */}
+              {}
               <h3 className="post-title">{post.title}</h3>
               <p className="post-body">{post.body}</p>
             </div>

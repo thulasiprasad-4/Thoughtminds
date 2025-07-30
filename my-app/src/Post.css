@@ -221,7 +221,7 @@
 .back-button:hover {
   background-color: #0056b3;
 }
-/* User section inside post card */
+
 .post-user {
   display: flex;
   align-items: center;
