@@ -4,46 +4,54 @@ import '../Post.css';
 
 const AllPost = ({ loggedInUserId }) => {
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json())
-      .then(data => {
-        const filteredPosts = data.filter(post => post.userId !== loggedInUserId);
+    Promise.all([
+      fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json()),
+      fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json())
+    ])
+      .then(([postsData, usersData]) => {
+        const filteredPosts = postsData.filter(post => post.userId !== loggedInUserId);
         setPosts(filteredPosts);
+        setUsers(usersData);
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, [loggedInUserId]);
 
-  if (loading) return <p className="loading-text">Loading posts...</p>;
-  if (posts.length === 0) return <p className="no-posts-text">No posts available.</p>;
+  const getUser = (userId) => users.find(user => user.id === userId);
 
+  
   return (
     <div className="posts-container">
-      {}
-      <button className="back-button" onClick={() => navigate(-1)}>
-        ← Back
-      </button>
-
+      <button className="back-button" onClick={() => navigate(-1)}>← Back</button>
       <h2 className="posts-heading">All Posts</h2>
+
       <div className="posts-grid">
-        {posts.map(post => (
-          <div key={post.id} className="post-card">
-            <h3 className="post-title">{post.title}</h3>
-            <p className="post-body">{post.body}</p>
-          </div>
-        ))}
+        {posts.map(post => {
+          const user = getUser(post.userId);
+          const initials = user?.name ? user.name.charAt(0).toUpperCase() : '?';
+
+          return (
+            <div key={post.id} className="post-card">
+              {}
+              <div className="post-user">
+                <div className="user-initial">{initials}</div>
+                <span className="user-name">{user?.name || 'Unknown User'}</span>
+              </div>
+
+              {}
+              <h3 className="post-title">{post.title}</h3>
+              <p className="post-body">{post.body}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 };
 
 export default AllPost;
-
-
-
-
-
